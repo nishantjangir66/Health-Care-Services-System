@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiology Clinic</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 2rem;
+    background-color: #b30000;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+#doctorList {
+    list-style: none;
+    padding: 0;
+}
+
+#doctorList li {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: #cc0000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff6666;
+}
+
+@media (max-width: 600px) {
+    header, .container {
+        padding: 1rem;
+    }
+}
+
+  /* Success message styling */
+  .success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    opacity: 1;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .success-message {
+      right: 10px;
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+  
+  /* New Code */
+  .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-column {
+            flex: 1 1 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer ul li a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer .contact-info {
+            margin-top: 15px;
+        }
+
+        .footer .contact-info p {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
+        }
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    position: sticky; /* Make navbar sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1000; /* Ensure navbar is above other content */
+}
+
+        .navbar .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #555;
+        }
+
+        .navbar .login-btn {
+            padding: 8px 16px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .navbar .login-btn:hover {
+            background-color: #ff4d4d;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 10;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #444;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        /* Close button for sidebar */
+        .sidebar .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block; /* Show hamburger icon on mobile */
+                position: absolute; /* Positioning for the hamburger */
+                left: 20px; /* Move hamburger to the left */
+            }
+
+            .navbar .logo {
+                flex: 2; /* Allow logo to take more space */
+                text-align: center; /* Keep logo centered */
+            }
+
+            .navbar {
+                justify-content: flex-start; /* Align items to the start */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"> <a href="/home"><img src="logo.ico" alt="" style="height: 50px; margin-top: 5px;"></a> </div>
+        <ul>
+            <li><a href="/home" style="font-size: 20px;">Home</a></li>
+            <li><a href="/appointment" style="font-size: 20px;">Appointment</a></li>
+            <li><a href="/about" style="font-size: 20px;">About Us</a></li>
+        </ul>
+        <button class="login-btn" style="width: 80px; height: 40px;"><a href="/logout"
+            style="color: black; text-decoration: none; font-size: 16px;">Logout</a></button>
+                <span class="menu-toggle" onclick="toggleSidebar()">☰</span>    </nav>
+
+                 <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <span class="close-btn" onclick="toggleSidebar()">×</span>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/appointment">Appointment</a></li>
+            <li><a href="/about">About Us</a></li>
+        </ul>
+    </div>
+    <header>
+        <h1>Cardiology Clinic</h1>
+        <p>Expert cardiac care for a healthier heart and life.</p>
+    </header>
+
+    <section id="description" class="container">
+        <h2>About Cardiology Services</h2>
+        <p>Our cardiology clinic provides comprehensive care for heart-related conditions. Our team of specialized cardiologists is dedicated to diagnosing, treating, and managing a variety of cardiovascular issues, including hypertension, coronary artery disease, and heart failure, with state-of-the-art treatments and compassionate care.</p>
+    </section>
+
+    <section id="doctors" class="container">
+        <h2>Our Cardiologists</h2>
+        <ul id="doctorList">
+            <li>
+                <h3>Dr. Michael Smith</h3>
+                <p>Specialty: Interventional Cardiology</p>
+            </li>
+            <li>
+                <h3>Dr. Priya Patel</h3>
+                <p>Specialty: Heart Failure and Transplant</p>
+              
+            </li>
+            <li>
+                <h3>Dr. Henry Li</h3>
+                <p>Specialty: Electrophysiology</p>
+            </li>
+        </ul>
+    </section>
+    <footer class="footer">
+        <!-- Company Information -->
+        <div class="footer-column">
+            <a href="/home"><img src="logo.ico" alt="" style="height: 50px; margin-top: 5px;"></a> 
+            
+            <p>&copy; 2024 Company Name. All rights reserved.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/appointment">Appointment</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul>
+        </div>
+
+        <!-- Working Hours -->
+        <div class="footer-column">
+            <h3>Working Hours</h3>
+            <p>Monday to Friday: 9:00 AM - 6:00 PM</p>
+            <p>Saturday: 10:00 AM - 4:00 PM</p>
+            <p>Sunday: Closed</p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p>Jaipur Rajastham</p>
+            <p>Phone: +918997654321</p>
+            <p>Email: info@company.com</p>
+        </div>
+    </footer>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+        document.getElementById('profileIcon').addEventListener('click', function() {
+            document.querySelector('.profile-container').classList.toggle('active');
+        });
+    
+        // Close dropdown if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-icon')) {
+                var dropdowns = document.getElementsByClassName('dropdown-menu');
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+                document.querySelector('.profile-container').classList.remove('active');
+            }
+        }
+    
+        
+    </script>
+</body>
+</html>

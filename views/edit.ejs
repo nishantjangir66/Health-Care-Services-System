@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/edit" method="post">
+    <h1>Edit Details</h1>
+    <input type="text" style="width: 500px; height: 50px; border-radius: 8px;" name="firstName" value=" <%= health.firstName %> "><br><br>
+    <input type="text"  style="width: 500px; height: 50px; border-radius: 8px;" name="lastName" value=" <%= health.lastName %> "><br><br>
+    <input type="text"  style="width: 500px; height: 50px; border-radius: 8px;" name="email" value=" <%= health.email %> "><br><br>
+    <input type="text"  style="width: 500px; height: 50px; border-radius: 8px;" name="mobileNumber" value=" <%= health.mobileNumber %> "><br><br>
+    <input type="submit"  style="width: 500px; height: 50px; border-radius: 8px;" value="Update">
+</form>
+</body>
+</html>

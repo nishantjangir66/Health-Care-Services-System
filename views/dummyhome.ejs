@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background-image: url(flat-lay-health-still-life-arrangement-with-copy-space_23-2148854064.avif);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .banner-content {
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .banner h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .banner p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .banner button {
+            padding: 12px 30px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .banner button:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 36px;
+            }
+
+            .banner p {
+                font-size: 18px;
+            }
+
+            .banner button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner h1 {
+                font-size: 28px;
+            }
+
+            .banner p {
+                font-size: 16px;
+            }
+
+            .banner button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+
+
+        .description-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+
+        .description-content {
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+
+
+        .description-text {
+            padding: 30px;
+            flex: 1;
+        }
+
+        .description-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .description-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .description-content {
+                flex-direction: column;
+            }
+
+            .description-text h2 {
+                font-size: 28px;
+            }
+
+            .description-text p {
+                font-size: 16px;
+            }
+
+            .description-content img {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .description-text h2 {
+                font-size: 24px;
+            }
+
+            .description-text p {
+                font-size: 14px;
+            }
+
+            .description-content img {
+                height: 200px;
+            }
+        }
+
+
+        .slider-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .product-card {
+            flex: 1 0 25%;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 16px;
+            color: #777;
+        }
+
+        .product-card button {
+            padding: 10px 15px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card button:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* Next and previous buttons */
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .product-card {
+                flex: 1 0 33.33%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-card {
+                flex: 1 0 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-card {
+                flex: 1 0 100%;
+            }
+        }
+
+
+
+
+
+
+
+        .form-container {
+            max-width: 1180px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #ff6b6b;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* Responsive design */
+        @media (min-width: 768px) {
+            .form-row {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .form-row .form-group {
+                width: 48%;
+            }
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-column {
+            flex: 1 1 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer ul li a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer .contact-info {
+            margin-top: 15px;
+        }
+
+        .footer .contact-info p {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+            position: sticky;
+            /* Make navbar sticky */
+            top: 0;
+            /* Stick to the top */
+            z-index: 1000;
+            /* Ensure navbar is above other content */
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #555;
+        }
+
+        .navbar .login-btn {
+            padding: 8px 16px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .navbar .login-btn:hover {
+            background-color: #ff4d4d;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 10;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #444;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        /* Close button for sidebar */
+        .sidebar .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                /* Show hamburger icon on mobile */
+                position: absolute;
+                /* Positioning for the hamburger */
+                left: 20px;
+                /* Move hamburger to the left */
+            }
+
+            .navbar .logo {
+                flex: 2;
+                /* Allow logo to take more space */
+                text-align: center;
+                /* Keep logo centered */
+            }
+
+            .navbar {
+                justify-content: flex-start;
+                /* Align items to the start */
+            }
+        }
+
+        /* toggle message */
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Profile Icon */
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        /* Dropdown Links */
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Hover Effect */
+        .dropdown-menu a:hover {
+            background-color: #f2f2f2;
+        }
+
+        /* Show dropdown on click */
+        .profile-container.active .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo"> <img src="logo.ico" alt="" style="height: 50px; margin-top: 5px;"> </div>
+        <ul>
+            <li><a href="/login" style="font-size: 20px;">Home</a></li>
+            <li><a href="/login" style="font-size: 20px;">Appointment</a></li>
+            <li><a href="/login" style="font-size: 20px;">About Us</a></li>
+        </ul>
+        <button class="login-btn" style="width: 80px; height: 40px;"><a href="/login"
+                style="color: black; text-decoration: none; font-size: 16px;">Login</a></button>
+        <span class="menu-toggle" onclick="toggleSidebar()">☰</span>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <span class="close-btn" onclick="toggleSidebar()">×</span>
+        <ul>
+            <li><a href="/login">Home</a></li>
+            <li><a href="/login">Appointment</a></li>
+            <li><a href="/login">About Us</a></li>
+        </ul>
+    </div>
+    <section class="banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1>Your Health is Our Priority</h1>
+            <p>Providing top-quality healthcare services to ensure your well-being.</p>
+            <button><a href="/login" style="color: black; text-decoration: none;">Make an Appointment</a></button>
+        </div>
+    </section>
+    <section class="description-section">
+        <div class="description-content">
+            <!-- Healthcare Image -->
+            <img src="flat-lay-health-still-life-arrangement-with-copy-space_23-2148854064.avif" alt="Healthcare">
+
+            <!-- Description Text -->
+            <div class="description-text">
+                <h2>Comprehensive Healthcare Services</h2>
+                <p>
+                    Our healthcare system is designed to offer a wide range of services to promote the well-being of
+                    individuals and communities. We are dedicated to providing compassionate care, advanced medical
+                    technologies, and a personalized approach to ensure the health and happiness of every patient. From
+                    routine check-ups to specialized treatments, we are here to support your journey to better health.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="product-card">
+                <img src="pedia.jpeg" alt="Product 1">
+                <h3>Pediatrics</h3>
+
+
+        </div>
+   
+            <div class="product-card">
+                <img src="ortho.png" alt="Product 2">
+                <h3>Orthopedic</h3>
+
+
+
+
+            </div>
+       
+                <div class="product-card">
+                    <img src="cardio.jpeg" alt="Product 3">
+                    <h3>Cardiology</h3>
+
+
+
+                </div>
+           
+                    <div class="product-card">
+                        <img src="neurology.jpeg" alt="Product 4">
+                        <h3>Neurology</h3>
+
+
+                    </div>
+              
+                   
+                        <div class="product-card">
+                            <img src="oncology.jpeg" alt="Product 5">
+                            <h3>Oncology</h3>
+
+
+                        </div>
+                        
+                      
+                            <div class="product-card">
+                                <img src="radio.jpeg" alt="Product 6">
+                                <h3>Radiology</h3>
+
+
+                            </div>
+                           
+                                <div class="product-card">
+                                    <img src="pther.jpeg" alt="Product 7">
+                                    <h3>Physical Therapy</h3>
+
+
+                                </div>
+                               
+                                    <div class="product-card">
+                                        <img src="ent.jpeg" alt="Product 8">
+                                        <h3>ENT</h3>
+
+
+                                    </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+
+
+    <div class="form-container">
+        <h2>Contact Us</h2>
+        <form action="/contact" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="firstName" placeholder="Enter your first name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="lastName" placeholder="Enter your last name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobileNumber" placeholder="Enter your mobile number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Write your message" required></textarea>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <footer class="footer">
+        <!-- Company Information -->
+        <div class="footer-column">
+            <img src="logo.ico" alt="">
+
+            <p>&copy; 2024 Company Name. All rights reserved.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/login">Home</a></li>
+                <li><a href="/login">Appointment</a></li>
+                <li><a href="/login">About Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Working Hours -->
+        <div class="footer-column">
+            <h3>Working Hours</h3>
+            <p>Monday to Friday: 9:00 AM - 6:00 PM</p>
+            <p>Saturday: 10:00 AM - 4:00 PM</p>
+            <p>Sunday: Closed</p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p>Jaipur Rajastham</p>
+            <p>Phone: +918997654321</p>
+            <p>Email: info@company.com</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.querySelector('.navbar ul');
+            navMenu.classList.toggle('active');
+        }
+        let currentIndex = 0;
+        const slider = document.getElementById('slider');
+        const totalCards = slider.children.length;
+        const itemsPerSlide = () => {
+            if (window.innerWidth < 480) return 1;
+            if (window.innerWidth < 768) return 2;
+            if (window.innerWidth < 1024) return 3;
+            return 4;
+        };
+
+        function moveSlide(n) {
+            const maxIndex = totalCards - itemsPerSlide();
+            currentIndex += n;
+
+            // Looping logic
+            if (currentIndex < 0) {
+                currentIndex = maxIndex; // Go to the last slide
+            }
+            if (currentIndex > maxIndex) {
+                currentIndex = 0; // Go back to the first slide
+            }
+
+            updateSliderPosition();
+        }
+
+        function updateSliderPosition() {
+            const slideWidth = slider.children[0].getBoundingClientRect().width;
+            const offset = -(currentIndex * slideWidth);
+            slider.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Update the slide on window resize
+        window.addEventListener('resize', updateSliderPosition);
+
+    </script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+        document.getElementById('profileIcon').addEventListener('click', function () {
+            document.querySelector('.profile-container').classList.toggle('active');
+        });
+
+        // Close dropdown if clicked outside
+        window.onclick = function (event) {
+            if (!event.target.matches('.profile-icon')) {
+                var dropdowns = document.getElementsByClassName('dropdown-menu');
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+                document.querySelector('.profile-container').classList.remove('active');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
